@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardVie"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardBackgroundColor="#E2E2E2"
+        card_view:cardCornerRadius="4dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        Voy a ver si puedo meter dos relative Layout
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageViewPoster"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:scaleType="centerCrop"
+            />
+    </RelativeLayout>
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_toRightOf="@+id/imageViewPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:text="Nombre"
+            />
+        <TextView
+            android:id="@+id/textViewDesc"
+            android:layout_toRightOf="@+id/imageViewPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="35dp"
+            android:text="Descripcion"/>
+        <TextView
+            android:id="@+id/textViewCont"
+            android:layout_toRightOf="@+id/imageViewPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="55dp"
+            android:text="Cantidad"/>
+    <TextView
+        android:id="@+id/editTextCont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_toRightOf="@+id/textViewCont"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="75dp"
+        android:inputType="number" />
+    <ImageView
+        android:id="@+id/icono"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.CardView>
