@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
         //Este para verlo como un grid pero de diferente tamaño como por ejemplo fotos!!!, con esto no se podria utilizar el setHasFixedSize de mas abajo
         //mLayaoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
-        mAdapter = new MyAdapter(mContext, frutas, R.layout.recycler_view_item, new MyAdapter.OnItemClickListener() {
+        //En el adaptador vamos a declarar nueestro contexto con el this y llevamos tanto en contexto como el activity
+        mAdapter = new MyAdapter(mContext, frutas, R.layout.recycler_view_item, this, new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Fruta frutas, int position) {
                 //Toast.makeText(MainActivity.this, name + " - " + position, Toast.LENGTH_LONG).show();
                 //deleteFruta(position);
                 añadirFruta(position);
+                mAdapter.notifyItemChanged(position);
 
             }
 
@@ -107,9 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.add_name:
-                this.addFruta(frutas.size());
+                int position = frutas.size();
+                //this.addFruta(position);
+                frutas.add(position, new Fruta("Nueva Fruta" + (++counter), "Fruta añadida" ,R.drawable.newmovie, 0, R.drawable.ic_orange ) );
+                mAdapter.notifyItemInserted(position);
+                //añadir un codigo
+                mLayaoutManager.scrollToPosition(position);
                 return true;
             default:
+                //return false;
                 return super.onOptionsItemSelected(item);
         }
 
@@ -117,35 +125,18 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //Context Menu para cada item
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        // Obtener info en el context menu del objeto que se pinche
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
-        switch (item.getItemId()) {
-            case R.id.CtxRecOpc1:
-                this.deleteFruta(info.position);
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
-    }
-
-
-
     private List<Fruta> getAllFrutas(){
         return  new ArrayList<Fruta>(){{
-            add(new Fruta("Pera","Fruta de agua", R.drawable.pera,R.drawable.ic_pera,1 ));
-            add(new Fruta("Naranja","Fruta de Valencia", R.drawable.naranja,R.drawable.ic_orange,1));
-            add(new Fruta("Kiwi","Fruta con pelo", R.drawable.kiwi,R.drawable.ic_kiwi,1));
-            add(new Fruta("Platano","Fruta de Canarias", R.drawable.platano,R.drawable.ic_banana,1));
+            add(new Fruta("Pera","Fruta de agua", R.drawable.pera,R.drawable.ic_pera,0 ));
+            add(new Fruta("Naranja","Fruta de Valencia", R.drawable.naranja,R.drawable.ic_orange,0));
+            add(new Fruta("Kiwi","Fruta con pelo", R.drawable.kiwi,R.drawable.ic_kiwi,0));
+            add(new Fruta("Platano","Fruta de Canarias", R.drawable.platano,R.drawable.ic_banana,0));
 
         }};
     }
 
    private void addFruta(int position){
-        frutas.add(position, new Fruta("Nueva Fruta" + (++counter), "Fruta añadida" ,R.drawable.newmovie, 1, R.drawable.ic_orange ) );
+        frutas.add(position, new Fruta("Nueva Fruta" + (++counter), "Fruta añadida" ,R.drawable.newmovie, 0, R.drawable.ic_orange ) );
         mAdapter.notifyItemInserted(position);
         //añadir un codigo
         mLayaoutManager.scrollToPosition(position);
@@ -160,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     private void añadirFruta(int position){
         counter = frutas.get(position).getContador() + 1;
         frutas.get(position).setContador(counter);
-        mAdapter.notifyItemChanged(position, frutas);
+        //mAdapter.notifyItemChanged(position, frutas);
         counter = 0;
     }
 }

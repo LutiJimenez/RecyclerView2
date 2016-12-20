@@ -5,11 +5,14 @@ package com.luti.seccion_03_recyclerview.models;
  */
 public class Fruta {
 
-    public String name;
-    public String description;
-    public int imagen;
-    public int icono;
-    public int contador = 0;
+    private String name;
+    private String description;
+    private int imagen;
+    private int icono;
+    private int contador = 0;
+
+    public static final int LIMITE = 10;
+    public static final int RESET = 0;
 
 
     public Fruta(){
@@ -60,12 +63,12 @@ public class Fruta {
     }
 
     public void setContador(int contador){
-        if (contador <= 10){
+        if (contador <= LIMITE){
             this.contador = contador;
         }
 
     }
-    public void setContadorCero(int contador){
-        this.contador = 0;
+    public void setContadorCero(){
+        this.contador = RESET;
     }
 }
